@@ -105,8 +105,13 @@ fprintf('\n');
 % Recall that the first column of X is all-ones. Thus, it does
 % not need to be normalized.
 price = 0; % You should change this
+x_est = [1650; 3];
+for feat_iter = 1: length(x_est)
+    x_est(feat_iter) = (x_est(feat_iter) - mu(feat_iter)) / sigma(feat_iter); 
+end
 
-
+x_est = [1; x_est];
+price = x_est' * theta;
 % ============================================================
 
 fprintf(['Predicted price of a 1650 sq-ft, 3 br house ' ...
