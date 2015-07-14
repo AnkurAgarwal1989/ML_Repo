@@ -81,43 +81,48 @@ X = [ones(m, 1) X];
 
 fprintf('Running gradient descent ...\n');
 
+figure; hold on;
 % Choose some alpha value
-alpha = 0.01;
-num_iters = 400;
+for alpha = 0.01:0.01:0.15;
+    num_iters = 4000;
+    
+    % Init Theta and Run Gradient Descent 
+    theta = zeros(3, 1);
+    [theta, J_history] = gradientDescentMulti(X, y, theta, alpha, num_iters);
 
-% Init Theta and Run Gradient Descent 
-theta = zeros(3, 1);
-[theta, J_history] = gradientDescentMulti(X, y, theta, alpha, num_iters);
+    % Plot the convergence graph
+    plot(1:numel(J_history), J_history, '-b', 'LineWidth', 2);
+    xlabel('Number of iterations');
+    ylabel('Cost J');
 
-% Plot the convergence graph
-figure;
-plot(1:numel(J_history), J_history, '-b', 'LineWidth', 2);
-xlabel('Number of iterations');
-ylabel('Cost J');
+    % Display gradient descent's result
+    fprintf('Theta computed from gradient descent: \n');
+    fprintf(' %f \n', theta);
+    fprintf('\n');
 
-% Display gradient descent's result
-fprintf('Theta computed from gradient descent: \n');
-fprintf(' %f \n', theta);
-fprintf('\n');
+    % Estimate the price of a 1650 sq-ft, 3 br house
+    area_est = 1650;
+    room_est = 3;
+    % ====================== YOUR CODE HERE ======================
+    % Recall that the first column of X is all-ones. Thus, it does
+    % not need to be normalized.
+    price = 0; % You should change this
+    x_est = [area_est; room_est];
+    for feat_iter = 1: length(x_est)
+        x_est(feat_iter) = (x_est(feat_iter) - mu(feat_iter)) / sigma(feat_iter); 
+    end
 
-% Estimate the price of a 1650 sq-ft, 3 br house
-% ====================== YOUR CODE HERE ======================
-% Recall that the first column of X is all-ones. Thus, it does
-% not need to be normalized.
-price = 0; % You should change this
-x_est = [1650; 3];
-for feat_iter = 1: length(x_est)
-    x_est(feat_iter) = (x_est(feat_iter) - mu(feat_iter)) / sigma(feat_iter); 
+    x_est = [1; x_est];
+    price = x_est' * theta;
+    % ============================================================
+
+    fprintf(['Predicted price of a 1650 sq-ft, 3 br house ' ...
+             '(using gradient descent):\n $%f\n at alpha $%f'], price, alpha);
+
+    fprintf('Program paused. Press enter to continue.\n');
+
 end
-
-x_est = [1; x_est];
-price = x_est' * theta;
-% ============================================================
-
-fprintf(['Predicted price of a 1650 sq-ft, 3 br house ' ...
-         '(using gradient descent):\n $%f\n'], price);
-
-fprintf('Program paused. Press enter to continue.\n');
+hold off;
 pause;
 
 %% ================ Part 3: Normal Equations ================
@@ -141,7 +146,7 @@ y = data(:, 3);
 m = length(y);
 
 % Add intercept term to X
-X = [ones(m, 1) X];
+X = [ones(m, 1), X];
 
 % Calculate the parameters from the normal equation
 theta = normalEqn(X, y);
@@ -155,8 +160,7 @@ fprintf('\n');
 % Estimate the price of a 1650 sq-ft, 3 br house
 % ====================== YOUR CODE HERE ======================
 price = 0; % You should change this
-
-
+price = [1; area_est; room_est]' * theta;
 % ============================================================
 
 fprintf(['Predicted price of a 1650 sq-ft, 3 br house ' ...
