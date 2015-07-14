@@ -31,9 +31,13 @@ for iter = 1: feature_length
     sigma(iter) = std(X_norm(:,iter));
     X_norm(:,iter) = (X_norm(:,iter) - mu(iter)) / sigma(iter);
 end
-
-
-
+%vectorization method
+mu = mean(X, 1); % columnwise mean
+sigma = std(X, 1); % columnwise standard deviation
+%these are vectors (row vector)...make them into arrays for faster subtraction and division w/o for loops
+mu = repmat(mu, size(X,1), 1); %replicated each row...in row direction
+sigma = repmat(sigma, size(X,1), 1); %replicated each row...in row direction
+X_norm = (X - mu) ./ sigma;
 
 
 
