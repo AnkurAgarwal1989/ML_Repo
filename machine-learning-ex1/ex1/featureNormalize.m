@@ -26,11 +26,11 @@ sigma = zeros(1, feature_length);
 %
 % Hint: You might find the 'mean' and 'std' functions useful.
 %       
-for iter = 1: feature_length
-    mu(iter) = mean(X_norm(:,iter));
-    sigma(iter) = std(X_norm(:,iter));
-    X_norm(:,iter) = (X_norm(:,iter) - mu(iter)) / sigma(iter);
-end
+% for iter = 1: feature_length
+%     mu(iter) = mean(X_norm(:,iter));
+%     sigma(iter) = std(X_norm(:,iter));
+%     X_norm(:,iter) = (X_norm(:,iter) - mu(iter)) / sigma(iter);
+% end
 %vectorization method
 mu = mean(X, 1); % columnwise mean
 sigma = std(X, 1); % columnwise standard deviation

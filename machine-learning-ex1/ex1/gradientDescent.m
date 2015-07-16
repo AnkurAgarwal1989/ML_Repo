@@ -21,13 +21,14 @@ for iter = 1:num_iters
     difference = X*theta - y;
     %vectorization
     theta_temp = theta - alpha/m * (X' * difference);
-    for theta_iter = 1: len_theta
-        theta_temp(theta_iter) = theta(theta_iter) - alpha * (sum(difference.* X(:, theta_iter)))/m;
-    end 
-    
-    for theta_iter = 1: len_theta
-        theta(theta_iter) = theta_temp(theta_iter);
-    end
+    theta = theta_temp;
+%     for theta_iter = 1: len_theta
+%         theta_temp(theta_iter) = theta(theta_iter) - alpha * (sum(difference.* X(:, theta_iter)))/m;
+%     end 
+%     
+%     for theta_iter = 1: len_theta
+%         theta(theta_iter) = theta_temp(theta_iter);
+%     end
     
     % ============================================================
 
