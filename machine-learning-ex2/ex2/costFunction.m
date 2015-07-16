@@ -19,13 +19,17 @@ grad = zeros(size(theta));
 %
 % Note: grad should have the same dimensions as theta
 %
+%cost of logistic reg: 1/m summn(-y*log(sigmoid(X*theta) -
+%(1-y)*log(sigmoid(1-X*theta))
 
+sig = sigmoid(X*theta);
 
+term_1 = -y .* log(sig);
+term_2 = -(1-y) .* log(1- sig);
 
-
-
-
-
+J = mean(term_1 + term_2);
+%gradient = dJ/Dtehta = i/m * summn( (sigmoid(X*theta) - y) * X))
+grad = 1/m * (X' * (sig - y));
 
 % =============================================================
 

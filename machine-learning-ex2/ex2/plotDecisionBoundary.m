@@ -14,11 +14,16 @@ hold on
 
 if size(X, 2) <= 3
     % Only need 2 points to define a line, so choose two endpoints
+    % find 2 extreme X1 points. we will find corresponsing X2 for these 2.
+    %So X1 will have 2 points, x11 and x12. we will find their counetrparts x21 and x22.  
     plot_x = [min(X(:,2))-2,  max(X(:,2))+2];
-
+    
     % Calculate the decision boundary line
+    % y here means y axis which is feature 2 (X2).
+    
+    %logistic regression decision boundary=> theta1 + theta2 * x11 + theta3 * x21 = 0
     plot_y = (-1./theta(3)).*(theta(2).*plot_x + theta(1));
-
+    
     % Plot, and adjust axes for better viewing
     plot(plot_x, plot_y)
     

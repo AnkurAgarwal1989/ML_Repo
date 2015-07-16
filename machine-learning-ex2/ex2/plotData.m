@@ -12,14 +12,11 @@ figure; hold on;
 %               examples and 'ko' for the negative examples.
 %
 
-
-
-
-
-
-
-
-
+pos = (y == 1); % pos at index of positive entries of y will be 1, else 0
+% or pos = find(y == 1)...both work. Former gives binary array(0 and 1),
+% latter gives indices of entries where value ==1
+plot(X(pos,1), X(pos,2),'k+');
+plot(X(~pos,1), X(~pos,2),'ko', 'markerfacecolor', 'r');
 % =========================================================================
 
 
