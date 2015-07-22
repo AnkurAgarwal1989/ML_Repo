@@ -1,4 +1,4 @@
-function plotDecisionBoundary(theta, X, y)
+function z = plotDecisionBoundary(theta, X, y)
 %PLOTDECISIONBOUNDARY Plots the data points X and y into a new figure with
 %the decision boundary defined by theta
 %   PLOTDECISIONBOUNDARY(theta, X,y) plots the data points with + for the 
@@ -32,8 +32,8 @@ if size(X, 2) <= 3
     axis([30, 100, 30, 100])
 else
     % Here is the grid range
-    u = linspace(-1, 1.5, 50);
-    v = linspace(-1, 1.5, 50);
+    u = linspace(30, 100, 50);
+    v = linspace(30, 100, 50);
 
     z = zeros(length(u), length(v));
     % Evaluate z = theta*x over the grid
@@ -46,7 +46,7 @@ else
 
     % Plot z = 0
     % Notice you need to specify the range [0, 0]
-    contour(u, v, z, [0, 0], 'LineWidth', 2)
+    contour(u,v,z, [0 0], 'LineWidth', 2)
 end
 hold off
 

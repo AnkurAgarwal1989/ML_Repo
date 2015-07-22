@@ -24,7 +24,7 @@ clear ; close all; clc
 %  The first two columns contains the X values and the third column
 %  contains the label (y).
 
-data = load('ex2data2.txt');
+data = load('ex2data1.txt');
 X = data(:, [1, 2]); y = data(:, 3);
 
 plotData(X, y);
@@ -61,7 +61,7 @@ X = mapFeature(X(:,1), X(:,2));
 initial_theta = zeros(size(X, 2), 1);
 
 % Set regularization parameter lambda to 1
-lambda = 1;
+lambda = 5;
 
 % Compute and display initial cost and gradient for regularized logistic
 % regression
@@ -87,7 +87,7 @@ pause;
 initial_theta = zeros(size(X, 2), 1);
 
 % Set regularization parameter lambda to 1 (you should vary this)
-lambda = 1;
+lambda = 5;
 
 % Set Options
 options = optimset('GradObj', 'on', 'MaxIter', 400);
@@ -97,7 +97,7 @@ options = optimset('GradObj', 'on', 'MaxIter', 400);
 	fminunc(@(t)(costFunctionReg(t, X, y, lambda)), initial_theta, options);
 
 % Plot Boundary
-plotDecisionBoundary(theta, X, y);
+z = plotDecisionBoundary(theta, X, y);
 hold on;
 title(sprintf('lambda = %g', lambda))
 
