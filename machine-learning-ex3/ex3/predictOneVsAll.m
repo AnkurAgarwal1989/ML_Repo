@@ -12,8 +12,8 @@ m = size(X, 1);
 num_labels = size(all_theta, 1);
 
 % You need to return the following variables correctly 
-p = zeros(size(X, 1), 1);
-
+p = zeros(m, 1);
+prediction_all = zeros(m, num_labels);
 % Add ones to the X data matrix
 X = [ones(m, 1) X];
 
@@ -30,10 +30,15 @@ X = [ones(m, 1) X];
 %       for each row.
 %       
 
+%i loops over all possbile entries/ inputs
+for i = 1:m
+    %all_theta is a matrix of theta for all classes...each row is for a
+    %class
+    pred = (all_theta * X(i, :)')';
+    prediction_all(i,:) = pred;
+end;
 
-
-
-
+[M,p] = max(prediction_all, [], 2);
 
 
 % =========================================================================

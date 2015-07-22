@@ -36,14 +36,14 @@ grad = zeros(size(theta));
 %           grad = grad + YOUR_CODE_HERE (using the temp variable)
 %
 
-reg = (lambda/(2*m)) * sum((theta(2:end) .^ 2));
 
-[J, grad] = costFunction(theta, X, y);
 
-J = J + reg;
-grad(2:end) = grad(2:end) + ((lambda/m)*theta(2:end));
+
+
+
+
 % =============================================================
 
-%grad = grad(:);
+grad = grad(:);
 
 end
