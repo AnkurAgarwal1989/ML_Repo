@@ -61,7 +61,7 @@ X = mapFeature(X(:,1), X(:,2));
 initial_theta = zeros(size(X, 2), 1);
 
 % Set regularization parameter lambda to 1
-lambda = 5;
+lambda = 1;
 
 % Compute and display initial cost and gradient for regularized logistic
 % regression
@@ -87,7 +87,7 @@ pause;
 initial_theta = zeros(size(X, 2), 1);
 
 % Set regularization parameter lambda to 1 (you should vary this)
-lambda = 5;
+lambda = 1;
 
 % Set Options
 options = optimset('GradObj', 'on', 'MaxIter', 400);
@@ -102,9 +102,10 @@ hold on;
 title(sprintf('lambda = %g', lambda))
 
 % Labels and Legend
-xlabel('Microchip Test 1')
-ylabel('Microchip Test 2')
-
+%xlabel('Microchip Test 1')
+%ylabel('Microchip Test 2')
+xlabel('Exam 1 Score');
+ylabel('Exam 2 Score');
 legend('y = 1', 'y = 0', 'Decision boundary')
 hold off;
 
