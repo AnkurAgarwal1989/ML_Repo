@@ -9,11 +9,9 @@ function p = predictOneVsAll(all_theta, X)
 %  for 4 examples) 
 
 m = size(X, 1);
-num_labels = size(all_theta, 1);
+%num_labels = size(all_theta, 1);
 
 % You need to return the following variables correctly 
-p = zeros(m, 1);
-prediction_all = zeros(m, num_labels);
 % Add ones to the X data matrix
 X = [ones(m, 1) X];
 
@@ -31,15 +29,15 @@ X = [ones(m, 1) X];
 %       
 
 %i loops over all possbile entries/ inputs
-for i = 1:m
+%for i = 1:m
     %all_theta is a matrix of theta for all classes...each row is for a
     %class
-    pred = (all_theta * X(i, :)')';
-    prediction_all(i,:) = pred;
-end;
+    %pred = (all_theta * X(i, :)')';
+    %prediction_all(i,:) = pred;
+%end;
+prediction_all = X * all_theta';
 
 [M,p] = max(prediction_all, [], 2);
-
 
 % =========================================================================
 
