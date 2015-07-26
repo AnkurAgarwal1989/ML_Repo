@@ -104,12 +104,13 @@ del3 = a3 - Y; %PD of Cost wrt Theta2
 % Code logic...since we multiplied inputs by (Theta') to calculate activations...
 %we will use Theta to back prop deltas.
 del2 = (del3 * Theta2(:, 2:end)) .* sigmoidGradient(z2); %PD of Cost wrt Theta3
-%leaving first column from Theta2 allows us to not calculate del2(0).
+%leaving first column from Theta2 allows us to not calculate
+%since first values are just biases and are always 1...
 % =========================================================================
 
 % Unroll gradients
-Theta1_grad = del2' * X(:, 2:end);
-Theta2_grad = del3' * a2(:, 2:end);
-grad = [Theta1_grad(:) ; Theta2_grad(:)];
+Theta1_grad = del2' * [ones(m,1) X]; %add the bias column to inputs
+Theta2_grad = del3' * [ones(size(a2,1),1) a2] ; %add the bias column to inputs
+grad = 1/m * [Theta1_grad(:) ; Theta2_grad(:)];
 
 end
