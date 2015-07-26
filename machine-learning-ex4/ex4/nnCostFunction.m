@@ -62,30 +62,54 @@ Theta2_grad = zeros(size(Theta2));
 %               and Theta2_grad from Part 2.
 %
 
+%=======================================================================
+%Part 1
+% Recoding output y to label matrix (Y)
+y_eye = eye(num_labels);
+Y = y_eye(y, :);
 
+%Feed forward
+% add bias unit
+%X = [ones(m,1) X];
+z2 = [ones(m,1) X] * Theta1'; % we need to add bias units only for feed-forward
+a2 = sigmoid(z2);
 
+%add bias unit
+%a2 = [ones(size(a2,1),1) a2];
+z3 = [ones(size(a2,1),1) a2] * Theta2'; % we need to add bias units only for feed-forward
+a3 = sigmoid(z3); 
 
+%Cost calculation
+% J = 1/m ((-Y(ln(prediction)) - (1-Y)(ln(1-prediction)))
+term1 = -Y .* (log(a3));
+term2 = -(1-Y) .* (log(1 - a3));
+sum_over_labels = sum((term1 + term2), 2); % this will return mx1 vector
+J = mean(sum_over_labels); % we need to do 1/m sum (which will be mean)
 
+%=======================================================================
+%Part 3
+% Regularization
+reg_Theta1 = sum(sum(Theta1(:, 2:end) .^ 2)); % summing up of squares of all theta values...leave out bias weights which will be in column 1
+reg_Theta2 = sum(sum(Theta2(:, 2:end) .^ 2));
+reg = (lambda) * (reg_Theta1 + reg_Theta2)/(2*m);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+J = J + reg;
 % -------------------------------------------------------------
 
+%=======================================================================
+%Part 2
+% Back Propagation
+del3 = a3 - Y; %PD of Cost wrt Theta2
+
+% Code logic...since we multiplied inputs by (Theta') to calculate activations...
+%we will use Theta to back prop deltas.
+del2 = (del3 * Theta2(:, 2:end)) .* sigmoidGradient(z2); %PD of Cost wrt Theta3
+%leaving first column from Theta2 allows us to not calculate del2(0).
 % =========================================================================
 
 % Unroll gradients
+Theta1_grad = del2' * X(:, 2:end);
+Theta2_grad = del3' * a2(:, 2:end);
 grad = [Theta1_grad(:) ; Theta2_grad(:)];
-
 
 end
