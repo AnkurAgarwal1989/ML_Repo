@@ -38,7 +38,17 @@ error_val = zeros(length(lambda_vec), 1);
 %       end
 %
 %
-
+for  i= 1 : length(lambda_vec)
+    %Here we are trying to plot effect of size of lambda on cross-validation
+    %Calculate theta for a lambda value
+    theta = trainLinearReg(X, y, lambda_vec(i));
+    %apply the theta and calculate training error on the same small set
+    error_train(i) = linearRegCostFunction(X, y, theta, 0);
+    %apply theta on entire cross-val set...save this cost value as ith
+    %index of error_var...this refers to cost after training with i
+    %training examples.
+    error_val(i) = linearRegCostFunction(Xval, yval, theta, 0);
+end
 
 
 

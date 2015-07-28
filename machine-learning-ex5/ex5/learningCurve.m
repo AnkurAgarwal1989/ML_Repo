@@ -52,8 +52,17 @@ error_val   = zeros(m, 1);
 %
 
 % ---------------------- Sample Solution ----------------------
-
-
+for i=1:m
+    %Here we are trying to plot effect of size of training set on cross-validation
+    %first pick 1toi training set. Calculate theta
+    theta = trainLinearReg(X(1:i,:), y(1:i), lambda);
+    %apply the theta and calculate training error on the same small set
+    error_train(i) = linearRegCostFunction(X(1:i,:), y(1:i), theta, 0);
+    %apply theta on entire cross-val set...save this cost value as ith
+    %index of error_var...this refers to cost after training with i
+    %training examples.
+    error_val(i) = linearRegCostFunction(Xval, yval, theta, 0);
+end;
 
 
 
