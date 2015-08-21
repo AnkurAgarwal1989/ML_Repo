@@ -57,9 +57,12 @@ l = 0;
 while ~isempty(email_contents)
 
     % Tokenize and also get rid of any punctuation
+    email_contents
     [str, email_contents] = ...
        strtok(email_contents, ...
               [' @$/#.-:&*+=[]?!(){},''">_<;%' char(10) char(13)]);
+    str      
+    email_contents
    
     % Remove any non alphanumeric characters
     str = regexprep(str, '[^a-zA-Z0-9]', '');
@@ -96,15 +99,9 @@ while ~isempty(email_contents)
     % Note: You can use strcmp(str1, str2) to compare two strings (str1 and
     %       str2). It will return 1 only if the two strings are equivalent.
     %
-
-
-
-
-
-
-
-
-
+    
+    id_in_vocab = find(strcmp(str, vocabList));
+    word_indices = [word_indices; id_in_vocab]
 
     % =============================================================
 
