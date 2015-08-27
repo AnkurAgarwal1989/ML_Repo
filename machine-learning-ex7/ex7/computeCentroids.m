@@ -26,12 +26,12 @@ centroids = zeros(K, n);
 % Note: You can use a for-loop over the centroids to compute this.
 %
 
-
-
-
-
-
-
+% Loop over all clusters...
+for c = 1: K
+    %find idxs assigned to the cluster
+    clustered_ids = idx == c;
+    centroids(c, :) = mean(X(clustered_ids, :));
+end
 
 % =============================================================
 

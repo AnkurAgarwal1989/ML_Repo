@@ -21,11 +21,20 @@ idx = zeros(size(X,1), 1);
 % Note: You can use a for-loop over the examples to compute this.
 %
 
-
-
-
-
-
+%array to store weight from centroid, which we can then easily sort and get
+%closest id.
+weightFromCentroid = zeros(K, 1);
+%Loop over every example in X
+for i = 1:size(X,1)
+    weightFromCentroid = zeros(K, 1);
+    for c = 1: K
+        weightFromCentroid(c) = (norm(X(i, :) - centroids(c, :))) ^ 2;
+    end
+    %sort the weights we calculated in  ascending order
+    [w, centroid_id] = sort(weightFromCentroid);
+    idx(i) = centroid_id(1);  
+    %keyboard
+end
 
 % =============================================================
 
