@@ -128,12 +128,15 @@ fprintf(['\nRunning PCA on face dataset.\n' ...
 %  Before running PCA, it is important to first normalize X by subtracting 
 %  the mean value from each feature
 [X_norm, mu, sigma] = featureNormalize(X);
+figure;
+displayData(X_norm(1:100, :));
+pause;
 
 %  Run PCA
 [U, S] = pca(X_norm);
 
 %  Visualize the top 36 eigenvectors found
-displayData(U(:, 1:36)');
+figure;displayData(U(:, 1:36)');
 
 fprintf('Program paused. Press enter to continue.\n');
 pause;
@@ -162,7 +165,7 @@ fprintf('\nVisualizing the projected (reduced dimension) faces.\n\n');
 
 K = 100;
 X_rec  = recoverData(Z, U, K);
-
+figure;
 % Display normalized data
 subplot(1, 2, 1);
 displayData(X_norm(1:100,:));
