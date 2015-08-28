@@ -47,12 +47,12 @@ for i=1:max_iters
     if plot_progress
         X_recovered = centroids(idx,:);
         % Reshape the recovered image into proper dimensions
-        X_recovered_temp = reshape(X_recovered, 128, 128, 3);
-        imagesc(X_recovered_temp);
-        drawnow;
+        %X_recovered_temp = reshape(X_recovered, 128, 128, 3);
+        %imagesc(X_recovered_temp);
+        %drawnow;
 
-        %plotProgresskMeans(X, centroids, previous_centroids, idx, K, i);
-        %previous_centroids = centroids;
+        plotProgresskMeans(X, centroids, previous_centroids, idx, K, i);
+        previous_centroids = centroids;
         fprintf('Press enter to continue.\n');
         %pause;
     end
