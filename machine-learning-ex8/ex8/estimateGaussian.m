@@ -21,7 +21,9 @@ sigma2 = zeros(n, 1);
 %               should contain variance of the i-th feature.
 %
 
-
+% we need mean of each feature..so use dim 1, column wise mean
+mu = mean(X, 1);
+sigma2 = var
 
 
 
