@@ -11,8 +11,8 @@ function [mu sigma2] = estimateGaussian(X)
 [m, n] = size(X);
 
 % You should return these values correctly
-mu = zeros(n, 1);
-sigma2 = zeros(n, 1);
+%mu = zeros(n, 1);
+%sigma2 = zeros(n, 1);
 
 % ====================== YOUR CODE HERE ======================
 % Instructions: Compute the mean of the data and the variances
@@ -23,7 +23,8 @@ sigma2 = zeros(n, 1);
 
 % we need mean of each feature..so use dim 1, column wise mean
 mu = mean(X, 1);
-sigma2 = var
+% Variance calculation
+sigma2 = mean((X-repmat(mu, m, 1)) .^ 2, 1);
 
 
 

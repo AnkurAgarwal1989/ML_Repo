@@ -40,19 +40,16 @@ Theta_grad = zeros(size(Theta));
 %                     partial derivatives w.r.t. to each element of Theta
 %
 
+%Calculating J
+hypothesis = ((X*Theta') - Y);
+%Here Theta is not a vector...so we can't use the vectorised mat' mat to
+%calc elementwise square like linear regresion
+J = 1/2 * sum(sum((hypothesis .^2) .* R));
 
+%Calculating gradient
 
-
-
-
-
-
-
-
-
-
-
-
+X_grad = (hypothesis.*R)*Theta;
+Theta_grad = (hypothesis.*R)'*X;
 
 
 % =============================================================
